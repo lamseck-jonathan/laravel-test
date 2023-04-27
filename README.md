@@ -28,7 +28,7 @@ There are some rules to follow:
 
 ## Deliverables
 What do we expect from you:
- - the link of the git repository   
+ - the link of the git repository in the tally form you need to fill to submit your application
  - several commits, with an explicit message each time
  - add a readme to explain your process and principles you've followed
 

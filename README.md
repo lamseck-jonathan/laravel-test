@@ -25,6 +25,7 @@ You can run the example file to see the method in action.
 ## Rules
 There are some rules to follow:
  - You must commit regularly
+ - Do not change the current app behavior
 
 ## Deliverables
 What do we expect from you:

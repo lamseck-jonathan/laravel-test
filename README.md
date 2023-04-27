@@ -32,6 +32,9 @@ There are some rules to follow:
 What do we expect from you:
  - the link of the git repository in the tally form you need to fill to submit your application
  - several commits, with an explicit message each time
- - add a readme to explain your process and principles you've followed
+ - add a readme to explain your process, principles you've followed and the command to use your app
+
+## Test this app
+You can test the app with a `make example`
 
 **Good luck!**

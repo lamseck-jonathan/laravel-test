@@ -1,4 +1,4 @@
-# Laravel Refactoring Kata Test
+# Laravel / Symfony Refactoring Kata Test
 
 ## Introduction
 
@@ -18,7 +18,7 @@ understandable by the next developers** and easy to change afterward. Now is the
 show your exceptional abilities and improve this implementation, extensible, and ready for the future
 features. Of course, **you have to port all the code to Laravel or Symfony (given the speciality you're applying on SAYNA Work)**.
 
-This exercise **was made to not last longer than 4 hours**, but we know that this can be too short to do it all, and you might take longer if it pleases you. Stop when you feel you've done something you feel comfortable sharing with us. Your task is not to make ALL the application on Laravel, we only want you to show off your skills. But keep in mind that your test result will give you your payment level at the end, and that you cannot change that if you screw up the test.
+This exercise **was made to not last longer than 4 hours**, but we know that this can be too short to do it all, and you might take longer if it pleases you. Stop when you feel you've done something you feel comfortable sharing with us. Your task is not to make ALL the application on Laravel/Symfony, we only want you to show off your skills. But keep in mind that your test result will give you your payment level at the end, and that you cannot change that if you screw up the test.
 
 You can run the example file to see the method in action.
 

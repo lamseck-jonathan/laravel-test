@@ -72,7 +72,7 @@ class TemplateManager
          */
         $_user  = $this->getUserData($data,$APPLICATION_CONTEXT);
         if($_user) {
-            (strpos($text, self::USER_FIRST_NAME) !== false) and $text = str_replace(self::USER_FIRST_NAME, ucfirst(mb_strtolower($_user->firstname)), $text);
+            $this->replaceUserPlaceholder($_user,$text);
         }
 
         return $text;
@@ -84,5 +84,13 @@ class TemplateManager
 
     private function getUserData(array $data,$applicationContext)    {
         return (isset($data['user'])  and ($data['user']  instanceof User))  ? $data['user']  : $applicationContext->getCurrentUser();
+    }
+
+    private function replaceUserPlaceholder($user, $text){
+        if(strpos($text, self::USER_FIRST_NAME) !== false){
+            $text = str_replace(self::USER_FIRST_NAME, ucfirst(mb_strtolower($user->firstname)), $text);
+        }
+
+        return  $text;
     }
 }

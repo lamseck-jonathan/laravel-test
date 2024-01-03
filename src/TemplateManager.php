@@ -63,7 +63,7 @@ class TemplateManager
          * USER
          * [user:*]
          */
-        $_user  = (isset($data['user'])  and ($data['user']  instanceof User))  ? $data['user']  : $APPLICATION_CONTEXT->getCurrentUser();
+        $_user  = $this->getUserData($data,$APPLICATION_CONTEXT);
         if($_user) {
             (strpos($text, '[user:first_name]') !== false) and $text = str_replace('[user:first_name]'       , ucfirst(mb_strtolower($_user->firstname)), $text);
         }
@@ -73,5 +73,9 @@ class TemplateManager
 
     private function getQuote(array $data){
         return (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
+    }
+
+    private function getUserData(array $data,$applicationContext)    {
+        return (isset($data['user'])  and ($data['user']  instanceof User))  ? $data['user']  : $applicationContext->getCurrentUser();
     }
 }

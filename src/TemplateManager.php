@@ -19,7 +19,7 @@ class TemplateManager
     {
         $APPLICATION_CONTEXT = ApplicationContext::getInstance();
 
-        $quote = (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
+        $quote = $this->getQuote($data);
 
         if ($quote)
         {
@@ -69,5 +69,9 @@ class TemplateManager
         }
 
         return $text;
+    }
+
+    private function getQuote(array $data){
+        return (isset($data['quote']) and $data['quote'] instanceof Quote) ? $data['quote'] : null;
     }
 }

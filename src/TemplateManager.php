@@ -38,25 +38,7 @@ class TemplateManager
                 $destination = DestinationRepository::getInstance()->getById($quote->destinationId);
             }
 
-            $containsSummaryHtml = strpos($text, self::QUOTE_SUMMARY_HTML);
-            $containsSummary     = strpos($text, self::QUOTE_SUMMARY);
-
-            if ($containsSummaryHtml !== false || $containsSummary !== false) {
-                if ($containsSummaryHtml !== false) {
-                    $text = str_replace(
-                        self::QUOTE_SUMMARY_HTML,
-                        Quote::renderHtml($_quoteFromRepository),
-                        $text
-                    );
-                }
-                if ($containsSummary !== false) {
-                    $text = str_replace(
-                        self::QUOTE_SUMMARY,
-                        Quote::renderText($_quoteFromRepository),
-                        $text
-                    );
-                }
-            }
+            $text = $this->replaceQuoteSummaryPlaceholder($text, $_quoteFromRepository);
 
             (strpos($text, self::QUOTE_DESTINATION_NAME) !== false) and $text = str_replace(self::QUOTE_DESTINATION_NAME,$destinationOfQuote->countryName,$text);
         }
@@ -84,6 +66,28 @@ class TemplateManager
 
     private function getUserData(array $data,$applicationContext)    {
         return (isset($data['user'])  and ($data['user']  instanceof User))  ? $data['user']  : $applicationContext->getCurrentUser();
+    }
+
+    private function replaceQuoteSummaryPlaceholder($text,$_quoteFromRepository){
+        $containsSummaryHtml = strpos($text, self::QUOTE_SUMMARY_HTML);
+        $containsSummary     = strpos($text, self::QUOTE_SUMMARY);
+
+        if ($containsSummaryHtml !== false) {
+            $text = str_replace(
+                self::QUOTE_SUMMARY_HTML,
+                Quote::renderHtml($_quoteFromRepository),
+                $text
+            );
+        }
+        if ($containsSummary !== false) {
+            $text = str_replace(
+                self::QUOTE_SUMMARY,
+                Quote::renderText($_quoteFromRepository),
+                $text
+            );
+        }
+
+        return $text;
     }
 
     private function replaceUserPlaceholder($user, $text){

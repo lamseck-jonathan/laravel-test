@@ -54,7 +54,7 @@ class TemplateManager
          */
         $_user  = $this->getUserData($data,$APPLICATION_CONTEXT);
         if($_user) {
-            $this->replaceUserPlaceholder($_user,$text);
+            $text = $this->replaceUserPlaceholder($_user,$text);
         }
 
         return $text;

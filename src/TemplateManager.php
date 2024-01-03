@@ -2,6 +2,13 @@
 
 class TemplateManager
 {
+
+    const QUOTE_DESTINATION_LINK = '[quote:destination_link]';
+    const QUOTE_SUMMARY_HTML = '[quote:summary_html]';
+    const QUOTE_SUMMARY = '[quote:summary]';
+    const QUOTE_DESTINATION_NAME = '[quote:destination_name]';
+    const USER_FIRST_NAME = '[user:first_name]';
+
     public function getTemplateComputed(Template $tpl, array $data)
     {
         if (!$tpl) {
@@ -27,37 +34,37 @@ class TemplateManager
             $usefulObject = SiteRepository::getInstance()->getById($quote->siteId);
             $destinationOfQuote = DestinationRepository::getInstance()->getById($quote->destinationId);
 
-            if(strpos($text, '[quote:destination_link]') !== false){
+            if(strpos($text, self::QUOTE_DESTINATION_LINK) !== false){
                 $destination = DestinationRepository::getInstance()->getById($quote->destinationId);
             }
 
-            $containsSummaryHtml = strpos($text, '[quote:summary_html]');
-            $containsSummary     = strpos($text, '[quote:summary]');
+            $containsSummaryHtml = strpos($text, self::QUOTE_SUMMARY_HTML);
+            $containsSummary     = strpos($text, self::QUOTE_SUMMARY);
 
             if ($containsSummaryHtml !== false || $containsSummary !== false) {
                 if ($containsSummaryHtml !== false) {
                     $text = str_replace(
-                        '[quote:summary_html]',
+                        self::QUOTE_SUMMARY_HTML,
                         Quote::renderHtml($_quoteFromRepository),
                         $text
                     );
                 }
                 if ($containsSummary !== false) {
                     $text = str_replace(
-                        '[quote:summary]',
+                        self::QUOTE_SUMMARY,
                         Quote::renderText($_quoteFromRepository),
                         $text
                     );
                 }
             }
 
-            (strpos($text, '[quote:destination_name]') !== false) and $text = str_replace('[quote:destination_name]',$destinationOfQuote->countryName,$text);
+            (strpos($text, self::QUOTE_DESTINATION_NAME) !== false) and $text = str_replace(self::QUOTE_DESTINATION_NAME,$destinationOfQuote->countryName,$text);
         }
 
         if (isset($destination))
-            $text = str_replace('[quote:destination_link]', $usefulObject->url . '/' . $destination->countryName . '/quote/' . $_quoteFromRepository->id, $text);
+            $text = str_replace(self::QUOTE_DESTINATION_LINK, $usefulObject->url . '/' . $destination->countryName . '/quote/' . $_quoteFromRepository->id, $text);
         else
-            $text = str_replace('[quote:destination_link]', '', $text);
+            $text = str_replace(self::QUOTE_DESTINATION_LINK, '', $text);
 
         /*
          * USER
@@ -65,7 +72,7 @@ class TemplateManager
          */
         $_user  = $this->getUserData($data,$APPLICATION_CONTEXT);
         if($_user) {
-            (strpos($text, '[user:first_name]') !== false) and $text = str_replace('[user:first_name]'       , ucfirst(mb_strtolower($_user->firstname)), $text);
+            (strpos($text, self::USER_FIRST_NAME) !== false) and $text = str_replace(self::USER_FIRST_NAME, ucfirst(mb_strtolower($_user->firstname)), $text);
         }
 
         return $text;

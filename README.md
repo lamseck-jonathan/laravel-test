@@ -10,17 +10,23 @@ Refactoring the TemplateManager Class without actually changing its current beha
 
 ## Installation 
 
+```bash
 composer install 
+```
 
 ## Running the test 
 
-make example
+```bash
+make example 
+```
 
 ## What are the principles we followed in this process
 
 to make this TemplateManager more readable we refactor this code , so we can use some clean code principles
--function with descriptive names
--function that do one thing
--writing the code to make it clear enough so you don't really need to add comments 
+-  function with descriptive names
+-  function that do one thing
+-  writing the code to make it clear enough so you don't really need to add comments 
 
-** Author - Lam Seck Jonathan **
+## Hope you enjoy it :)
+
+**Author** - [Lam Seck Jonathan](https://lamseck-jonathan.netlify.app/)

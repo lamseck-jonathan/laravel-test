@@ -40,7 +40,7 @@ class TemplateManager
 
             $text = $this->replaceQuoteSummaryPlaceholder($text, $_quoteFromRepository);
 
-            (strpos($text, self::QUOTE_DESTINATION_NAME) !== false) and $text = str_replace(self::QUOTE_DESTINATION_NAME,$destinationOfQuote->countryName,$text);
+            $text = $this->replaceDestinationNamePlaceholder($text, $destinationOfQuote);
         }
 
         if (isset($destination))
@@ -85,6 +85,15 @@ class TemplateManager
                 Quote::renderText($_quoteFromRepository),
                 $text
             );
+        }
+
+        return $text;
+    }
+
+    private function replaceDestinationNamePlaceholder($text, $destinationOfQuote)
+    {
+        if (strpos($text, self::QUOTE_DESTINATION_NAME) !== false) {
+            $text = str_replace(self::QUOTE_DESTINATION_NAME,$destinationOfQuote->countryName,$text);
         }
 
         return $text;
